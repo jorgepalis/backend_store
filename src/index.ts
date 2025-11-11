@@ -7,7 +7,17 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/* { strapi }: { strapi: Core.Strapi } */) {},
+  register({ strapi }) {
+    // Solución para el bug de la cookie segura detrás de un proxy en Strapi v5.25+
+    // Esto fuerza a que el socket se considere cifrado, satisfaciendo la
+    // comprobación de la librería 'cookies' que ignora la configuración de proxy de Koa.
+    strapi.server.use(async (ctx, next) => {
+      if (ctx.req?.socket) {
+        (ctx.req.socket as any).encrypted = true;
+      }
+      await next();
+    });
+  },
 
   /**
    * An asynchronous bootstrap function that runs before
