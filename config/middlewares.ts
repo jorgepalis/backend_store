@@ -14,6 +14,9 @@ export default [
           upgradeInsecureRequests: null,
         },
       },
+      // ESTO ES LO QUE SOLUCIONA EL PROBLEMA
+      // Le dice a Strapi que confíe en el proxy de Render
+      trustedProxies: ['127.0.0.1', '::1', 'localhost', 'strapi.io', 'render.com', 'onrender.com'],
     },
   },
   // 👇 ESTO ES CLAVE para Render/Proxies
