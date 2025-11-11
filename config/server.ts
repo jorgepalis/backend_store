@@ -18,13 +18,11 @@ export default ({ env }: { env: any }) => ({
   app: {
     //keys: env.array('APP_KEYS', ['key1', 'key2']),
     keys: env.array('APP_KEYS'),
+    proxy: true,
   },
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
-  
-  // ¡La solución al error original!
-  proxy: true,
   
 });
 
